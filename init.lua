@@ -13,17 +13,15 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 			if node ~= nil then
 				local name = node.name
 				local nodedef = minetest.registered_nodes[name]
-				local watered = false
+				local watered = true
 				local wear, newtool
 				if minetest.get_item_group(name, "water") > 0 then
 					newtool = { name = "wateringcan:wateringcan_water" }
 					watered = false
 				elseif name == "farming:soil" and minetest.get_modpath("farming") ~= nil then
 					minetest.set_node(pointed_thing.under, { name = "farming:soil_wet" })
-					watered = true
-				elseif minetest.get_item_group(name, "sucky") > 0 and minetest.get_modpath("pedology") ~= nil then
+				elseif minetest.get_item_group(name, "sucky") > 0 and minetest.get_item_group(name, "wet" <= 2) and minetest.get_modpath("pedology") ~= nil then
 					pedology.wetten(pointed_thing.under)
-					watered = true
 				end
 
 				if watered then
