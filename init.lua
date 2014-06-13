@@ -15,13 +15,17 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 				local nodedef = minetest.registered_nodes[name]
 				local watered = false
 				local wear, newtool
-				if name == "farming:soil" and minetest.get_modpath("farming") ~= nil then
+				if minetest.get_item_group(name, "water") > 0 then
+					newtool = { name = "wateringcan:wateringcan_water" }
+					watered = false
+				elseif name == "farming:soil" and minetest.get_modpath("farming") ~= nil then
 					minetest.set_node(pointed_thing.under, { name = "farming:soil_wet" })
 					watered = true
 				elseif minetest.get_item_group(name, "sucky") > 0 and minetest.get_modpath("pedology") ~= nil then
 					pedology.wetten(pointed_thing.under)
 					watered = true
 				end
+
 				if watered then
 					wear = itemstack:get_wear()
 					wear = wear + 2849	 -- 24 uses
@@ -48,4 +52,14 @@ minetest.register_tool("wateringcan:wateringcan_empty", {
 	tool_capabilities = {
 		full_punch_interval = 2.0,
 	},
+	on_place = function(itemstack, user, pointed_thing)
+		local node = minetest.get_node_or_nil(pointed_thing.under)
+		if node ~= nil then
+			local name = node.name
+			local nodedef = minetest.registered_nodes[name]
+			if minetest.get_item_group(name, "water") > 0 then
+				return { name = "wateringcan:wateringcan_water" }
+			end
+		end
+	end
 })
