@@ -1,0 +1,2 @@
+watering can with water = Gießkanne mit Wasser
+empty watering can = leere Gießkanne

@@ -1,5 +1,12 @@
+if (minetest.get_modpath("intllib")) then
+	dofile(minetest.get_modpath("intllib").."/intllib.lua")
+	S = intllib.Getter(minetest.get_current_modname())
+else
+	S = function ( s ) return s end
+end
+
 minetest.register_tool("wateringcan:wateringcan_water", {
-	description = "watering can with water",
+	description = S("watering can with water"),
 	inventory_image = "wateringcan_wateringcan_water.png",
 	wield_image = "wateringcan_wateringcan_wield.png",
 	liquids_pointable = true,
@@ -57,7 +64,7 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 )
 
 minetest.register_tool("wateringcan:wateringcan_empty", {
-	description = "empty watering can",
+	description = S("empty watering can"),
 	inventory_image = "wateringcan_wateringcan_empty.png",
 	wield_image = "wateringcan_wateringcan_wield.png",
 	liquids_pointable = true,
