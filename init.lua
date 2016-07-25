@@ -23,7 +23,7 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 				local watered = true
 				local wear, newtool
 				local underunder
-				if minetest.get_item_group(node.name, "plant") > 0 or minetest.get_item_group(node.name, "flora") > 0 then
+				if minetest.get_item_group(node.name, "plant") > 0 or minetest.get_item_group(node.name, "flora") > 0 or minetest.get_item_group(node.name, "seed") > 0 then
 					pos = {x=pos.x, y=pos.y-1, z=pos.z}
 					underunder = minetest.get_node_or_nil(pos)
 					if(underunder ~= nil) then
