@@ -22,7 +22,7 @@ The watering can uses the “tool wear” bar to indicate how much water is left
 The watering can itself does *not* wear off and does not get destroyed by usage (it just becomes empty).
 
 Currently, the watering can supports the Farming mod (from `minetest_game`) and the Pedology mod.
-For the Farming mod, you can use the watering can on soil to wetten it.
+For the Farming mod, you can use the watering can on soil or desert sand soil to wetten it.
 For the Pedology mod, you can increase the wetness level of ground blocks by 1, but the maximum wetness you can reach is 2 to avoid creating mud lakes only with a watering can. ;-)
 
 Anything else currently can’t become wet; you’d simply waste your water. ;-)

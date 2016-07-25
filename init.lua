@@ -41,6 +41,8 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 					watered = false
 				elseif name == "farming:soil" and minetest.get_modpath("farming") ~= nil then
 					minetest.set_node(pos, { name = "farming:soil_wet" })
+				elseif name == "farming:desert_sand_soil" and minetest.get_modpath("farming") ~= nil then
+					minetest.set_node(pos, { name = "farming:desert_sand_soil_wet" })
 
 				elseif minetest.get_item_group(name, "sucky") > 0 and minetest.get_item_group(name, "wet") < 2 and minetest.get_modpath("pedology") ~= nil then
 					pedology.wetten(pos)
