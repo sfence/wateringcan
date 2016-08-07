@@ -7,7 +7,7 @@ else
 end
 
 minetest.register_tool("wateringcan:wateringcan_water", {
-	description = S("watering can with water"),
+	description = S("Watering can with water"),
 	inventory_image = "wateringcan_wateringcan_water.png",
 	wield_image = "wateringcan_wateringcan_wield.png",
 	liquids_pointable = true,
@@ -67,7 +67,7 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 )
 
 minetest.register_tool("wateringcan:wateringcan_empty", {
-	description = S("empty watering can"),
+	description = S("Empty watering can"),
 	inventory_image = "wateringcan_wateringcan_empty.png",
 	wield_image = "wateringcan_wateringcan_wield.png",
 	liquids_pointable = true,
