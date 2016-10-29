@@ -50,6 +50,7 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 				end
 
 				if watered then
+					minetest.sound_play({name = "wateringcan_pour", gain = 0.25, max_hear_distance = 10}, { pos = user:getpos() })
 					wear = itemstack:get_wear()
 					wear = wear + 2849	 -- 24 uses
 					if(wear > 65535) then
