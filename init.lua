@@ -87,6 +87,33 @@ minetest.register_tool("wateringcan:wateringcan_empty", {
 	end
 })
 
+if minetest.get_modpath("bucket") ~= nil then
+	if minetest.get_modpath("default") ~= nil then
+		minetest.register_craft({
+			output = "wateringcan:wateringcan_empty",
+			recipe = {
+				{"", "", "default:steel_ingot"},
+				{"group:stick", "default:steel_ingot", ""},
+				{"default:steel_ingot", "bucket:bucket_empty", ""},
+			}
+		})
+		minetest.register_craft({
+			output = "wateringcan:wateringcan_water",
+			recipe = {
+				{"", "", "default:steel_ingot"},
+				{"group:stick", "default:steel_ingot", ""},
+				{"default:steel_ingot", "group:water_bucket", ""},
+			}
+		})
+	end
+	minetest.register_craft({
+		output = "wateringcan:wateringcan_water",
+		type = "shapeless",
+		recipe = {"wateringcan:wateringcan_empty", "group:water_bucket"},
+		replacements = {{"group:water_bucket", "bucket:bucket_empty"}}
+	})
+end
+
 if minetest.get_modpath("doc_items") ~= nil then
 	local d = S("Watering cans are used to collect a small amount of water in order to pour it on dry blocks. One filled watering can can be used 24 times, after which it has to be refilled. Watering cans don't wear out.")
 	local u = S("Rightclick on water (or any other block belonging to the “Water” group) to fill or refill the watering can. Rightclick with the filled can on an appropriate block (or a plant above it) to wetten it. Soil, desert sand soil, and other blocks capable of becoming wet can be wettened. The tool wear indicator of the watering can indicates the amount of water left.")
