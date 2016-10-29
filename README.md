@@ -1,6 +1,6 @@
 #Watering Can
 * A mod for Minetest
-* Version: 1.0
+* Version: 1.1
 
 ##Description
 This mod adds a watering can to minetest which you can use to make some blocks wet. :-)
