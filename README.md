@@ -8,7 +8,7 @@ This mod adds a watering can to minetest which you can use to make some blocks w
 ##Getting the watering can
 You can get a watering can with the creative inventory or with the chat command
 
-    `/giveme wateringcan:wateringcan_empty`
+    /giveme wateringcan:wateringcan_empty
 
 This chat commands requires you to have the `give` privilege.
 
