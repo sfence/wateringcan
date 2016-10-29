@@ -6,16 +6,19 @@
 This mod adds a watering can to minetest which you can use to make some blocks wet. :-)
 
 ##Getting the watering can
-You can get a watering can with the creative inventory or with the chat command
+You can craft the watering can with this recipe:
 
-    /giveme wateringcan:wateringcan_empty
+    ..S
+    sS.
+    SB.
 
-This chat commands requires you to have the `give` privilege.
-
-There is no crafting recipe yet. There is one planned in the future.
+* S = Steel Ingot
+* s = Stick or other item of group “stick”
+* B = Empty Bucket or a water bucket or other item of group “`water_bucket`”
 
 ##Usage
-To use a watering can, you have to first fill it up. Rightclick with it on water.
+To use a watering can, you have to first fill it up. Rightclick with it on water. Alternatively,
+you can refill the watering can by crafting (empty watering can + any water bucket).
 Your watering can is now full. To use it, you have to rightclick on a node which can be made wet.
 You can use the watering can 24 times, then you have to fill it up again.
 The watering can uses the “tool wear” bar to indicate how much water is left. 
