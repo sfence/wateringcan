@@ -117,6 +117,6 @@ if minetest.get_modpath("bucket") ~= nil then
 	})
 end
 
-if minetest.get_modpath("doc") ~= nil then
+if minetest.get_modpath("doc") ~= nil and minetest.get_modpath("doc_items") ~= nil then
 	doc.add_entry_alias("tools", "wateringcan:wateringcan_empty", "wateringcan:wateringcan_water")
 end
