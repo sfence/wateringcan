@@ -76,7 +76,7 @@ end
 
 minetest.register_tool("wateringcan:wateringcan_empty", {
 	description = S("Empty watering can"),
-	_doc_items_entry_name,
+	_doc_items_entry_name = entry_name,
 	_doc_items_longdesc = longdesc,
 	_doc_items_usagehelp = usagehelp,
 	inventory_image = "wateringcan_wateringcan_empty.png",
