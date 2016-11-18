@@ -66,11 +66,19 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 	}
 )
 
+local usagehelp, longdesc, entry_name
+local entry_name
+if minetest.get_modpath("doc_items") then
+	usagehelp = S("Rightclick on water (or any other block belonging to the “@1” group) to fill or refill the watering can. Rightclick with the filled can on an appropriate block (or a plant above it) to wetten it. Soil, desert sand soil, and other blocks capable of becoming wet can be wettened. The tool wear indicator of the watering can indicates the amount of water left.", doc.sub.items.get_group_name("water"))
+	entry_name = S("Watering can")
+	longdesc = S("Watering cans are used to collect a small amount of water in order to pour it on dry blocks. One filled watering can can be used 24 times, after which it has to be refilled. Watering cans don't wear out.")
+end
+
 minetest.register_tool("wateringcan:wateringcan_empty", {
 	description = S("Empty watering can"),
-	_doc_items_entry_name = S("Watering can"),
-	_doc_items_longdesc = S("Watering cans are used to collect a small amount of water in order to pour it on dry blocks. One filled watering can can be used 24 times, after which it has to be refilled. Watering cans don't wear out."),
-	_doc_items_usagehelp = S("Rightclick on water (or any other block belonging to the “@1” group) to fill or refill the watering can. Rightclick with the filled can on an appropriate block (or a plant above it) to wetten it. Soil, desert sand soil, and other blocks capable of becoming wet can be wettened. The tool wear indicator of the watering can indicates the amount of water left.", doc.sub.items.get_group_name("water")),
+	_doc_items_entry_name,
+	_doc_items_longdesc = longdesc,
+	_doc_items_usagehelp = usagehelp,
 	inventory_image = "wateringcan_wateringcan_empty.png",
 	wield_image = "wateringcan_wateringcan_wield.png",
 	liquids_pointable = true,
