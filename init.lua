@@ -12,6 +12,7 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 	wield_image = "wateringcan_wateringcan_wield.png",
 	liquids_pointable = true,
 	stack_max = 1,
+	groups = { disable_repair = 1 },
 	tool_capabilities = {
 		full_punch_interval = 2.0,
 	},
@@ -83,6 +84,7 @@ minetest.register_tool("wateringcan:wateringcan_empty", {
 	wield_image = "wateringcan_wateringcan_wield.png",
 	liquids_pointable = true,
 	stack_max = 1,
+	groups = { disable_repair = 1 },
 	tool_capabilities = {
 		full_punch_interval = 2.0,
 	},
