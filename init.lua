@@ -36,6 +36,7 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 				if minetest.get_item_group(name, "water") > 0 then
 					newtool = { name = "wateringcan:wateringcan_water" }
 					watered = false
+					minetest.sound_play({name = "wateringcan_fill", gain = 0.25, max_hear_distance = 10}, { pos = user:get_pos() })
 				elseif name == "farming:soil" and minetest.get_modpath("farming") ~= nil then
 					minetest.set_node(pos, { name = "farming:soil_wet" })
 				elseif name == "farming:desert_sand_soil" and minetest.get_modpath("farming") ~= nil then
@@ -46,7 +47,7 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 				end
 
 				if watered then
-					minetest.sound_play({name = "wateringcan_pour", gain = 0.25, max_hear_distance = 10}, { pos = user:getpos() })
+					minetest.sound_play({name = "wateringcan_pour", gain = 0.25, max_hear_distance = 10}, { pos = user:get_pos() })
 					wear = itemstack:get_wear()
 					wear = wear + 2849	 -- 24 uses
 					if(wear > 65535) then
@@ -89,6 +90,7 @@ minetest.register_tool("wateringcan:wateringcan_empty", {
 			local name = node.name
 			local nodedef = minetest.registered_nodes[name]
 			if minetest.get_item_group(name, "water") > 0 then
+				minetest.sound_play({name = "wateringcan_fill", gain = 0.25, max_hear_distance = 10}, { pos = user:get_pos() })
 				return { name = "wateringcan:wateringcan_water" }
 			end
 		end
