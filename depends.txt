@@ -1,6 +1,0 @@
-default?
-bucket?
-farming?
-pedology?
-doc?
-doc_items?
