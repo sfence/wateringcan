@@ -44,4 +44,4 @@ There are only optional dependencies:
 However, it recommended to use at least one of these mods, otherwise you have nothing to use the watering can on. ;-)
 
 ## License
-WTFPL.
+MIT License
