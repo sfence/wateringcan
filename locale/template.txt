@@ -1,3 +1,4 @@
+# textdomain:wateringcan
 Watering can with water
 Empty watering can
 Watering can

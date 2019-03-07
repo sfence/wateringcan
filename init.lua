@@ -1,9 +1,4 @@
-local S
-if (minetest.get_modpath("intllib")) then
-	S = intllib.Getter()
-else
-	S = function(s,a,...)a={a,...}return s:gsub("@(%d+)",function(n)return a[tonumber(n)]end)end
-end
+local S = minetest.get_translator("wateringcan")
 
 minetest.register_tool("wateringcan:wateringcan_water", {
 	description = S("Watering can with water"),
