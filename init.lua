@@ -1,5 +1,48 @@
 local S = minetest.get_translator("wateringcan")
 
+-- some lists make it extendable
+wateringcan = {
+	soakable_nodes = {},
+	soakable_groups = {},
+}
+
+if minetest.get_modpath("farming") then
+	wateringcan.soakable_nodes["farming:soil"] = function(pos)
+		minetest.set_node(pos, { name = "farming:soil_wet" })
+	end
+	wateringcan.soakable_nodes["farming:dry_soil"] = function(pos)
+		minetest.set_node(pos, { name = "farming:dry_soil_wet" })
+	end
+	wateringcan.soakable_nodes["farming:desert_sand_soil"] = function(pos)
+		minetest.set_node(pos, { name = "farming:desert_sand_soil_wet" })
+	end
+end
+if minetest.get_modpath("hades_farming") then
+	wateringcan.soakable_nodes["hades_farming:soil"] = function(pos)
+		minetest.set_node(pos, { name = "hades_farming:soil_wet" })
+	end
+end
+if minetest.get_modpath("pedology") then
+	wateringcan.soakable_groups["sucky"] = function(pos, node_name)
+		if (minetest.get_item_group(node_name, "wet")<2) then
+			pedology.wetten(pos)
+		end
+	end
+end
+
+local function soak_node(pos, node_name)
+	local soakable_callback = wateringcan.soakable_nodes[node_name];
+	if soakable_callback then
+		soakable_callback(pos);
+	else
+		for group_name,group_callback in pairs(wateringcan.soakable_groups) do
+			if (minetest.get_item_group(node_name, group_name)>0) then
+				group_callback(pos);
+			end
+		end
+	end
+end
+
 minetest.register_tool("wateringcan:wateringcan_water", {
 	description = S("Watering can with water"),
 	_doc_items_create_entry = false,
@@ -37,13 +80,8 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 					newtool = { name = "wateringcan:wateringcan_water" }
 					watered = false
 					minetest.sound_play({name = "wateringcan_fill", gain = 0.25, max_hear_distance = 10}, { pos = user:get_pos() }, true)
-				elseif name == "farming:soil" and minetest.get_modpath("farming") ~= nil then
-					minetest.set_node(pos, { name = "farming:soil_wet" })
-				elseif name == "farming:desert_sand_soil" and minetest.get_modpath("farming") ~= nil then
-					minetest.set_node(pos, { name = "farming:desert_sand_soil_wet" })
-
-				elseif minetest.get_item_group(name, "sucky") > 0 and minetest.get_item_group(name, "wet") < 2 and minetest.get_modpath("pedology") ~= nil then
-					pedology.wetten(pos)
+				else
+					soak_node(pos, name);
 				end
 
 				if watered then
@@ -121,6 +159,32 @@ if minetest.get_modpath("bucket") ~= nil then
 		type = "shapeless",
 		recipe = {"wateringcan:wateringcan_empty", "group:water_bucket"},
 		replacements = {{"group:water_bucket", "bucket:bucket_empty"}}
+	})
+end
+if minetest.get_modpath("hades_bucket") ~= nil then
+	if minetest.get_modpath("hades_core") ~= nil then
+		minetest.register_craft({
+			output = "wateringcan:wateringcan_empty",
+			recipe = {
+				{"", "", "hades_core:steel_ingot"},
+				{"group:stick", "hades_core:steel_ingot", ""},
+				{"hades_core:steel_ingot", "hades_bucket:bucket_empty", ""},
+			}
+		})
+		minetest.register_craft({
+			output = "wateringcan:wateringcan_water",
+			recipe = {
+				{"", "", "hades_core:steel_ingot"},
+				{"group:stick", "hades_core:steel_ingot", ""},
+				{"hades_core:steel_ingot", "group:water_bucket", ""},
+			}
+		})
+	end
+	minetest.register_craft({
+		output = "wateringcan:wateringcan_water",
+		type = "shapeless",
+		recipe = {"wateringcan:wateringcan_empty", "group:water_bucket"},
+		replacements = {{"group:water_bucket", "hades_bucket:bucket_empty"}}
 	})
 end
 
