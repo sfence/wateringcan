@@ -2,42 +2,42 @@ local S = minetest.get_translator("wateringcan")
 
 -- some lists make it extendable
 wateringcan = {
-	soakable_nodes = {},
-	soakable_groups = {},
+	wettable_nodes = {},
+	wettable_groups = {},
 }
 
 if minetest.get_modpath("farming") then
-	wateringcan.soakable_nodes["farming:soil"] = function(pos)
+	wateringcan.wettable_nodes["farming:soil"] = function(pos)
 		minetest.set_node(pos, { name = "farming:soil_wet" })
 	end
-	wateringcan.soakable_nodes["farming:dry_soil"] = function(pos)
+	wateringcan.wettable_nodes["farming:dry_soil"] = function(pos)
 		minetest.set_node(pos, { name = "farming:dry_soil_wet" })
 	end
-	wateringcan.soakable_nodes["farming:desert_sand_soil"] = function(pos)
+	wateringcan.wettable_nodes["farming:desert_sand_soil"] = function(pos)
 		minetest.set_node(pos, { name = "farming:desert_sand_soil_wet" })
 	end
 end
 if minetest.get_modpath("hades_farming") then
-	wateringcan.soakable_nodes["hades_farming:soil"] = function(pos)
+	wateringcan.wettable_nodes["hades_farming:soil"] = function(pos)
 		minetest.set_node(pos, { name = "hades_farming:soil_wet" })
 	end
 end
 if minetest.get_modpath("pedology") then
-	wateringcan.soakable_groups["sucky"] = function(pos, node_name)
+	wateringcan.wettable_groups["sucky"] = function(pos, node_name)
 		if (minetest.get_item_group(node_name, "wet")<2) then
 			pedology.wetten(pos)
 		end
 	end
 end
 
-local function soak_node(pos, node_name)
-	local soakable_callback = wateringcan.soakable_nodes[node_name];
-	if soakable_callback then
-		soakable_callback(pos);
+local function wetten_node(pos, node_name)
+	local wettable_callback = wateringcan.wettable_nodes[node_name];
+	if wettable_callback then
+		wettable_callback(pos, node_name);
 	else
-		for group_name,group_callback in pairs(wateringcan.soakable_groups) do
+		for group_name,group_callback in pairs(wateringcan.wettable_groups) do
 			if (minetest.get_item_group(node_name, group_name)>0) then
-				group_callback(pos);
+				group_callback(pos, node_name);
 			end
 		end
 	end
@@ -81,7 +81,7 @@ minetest.register_tool("wateringcan:wateringcan_water", {
 					watered = false
 					minetest.sound_play({name = "wateringcan_fill", gain = 0.25, max_hear_distance = 10}, { pos = user:get_pos() }, true)
 				else
-					soak_node(pos, name);
+					wetten_node(pos, name);
 				end
 
 				if watered then
