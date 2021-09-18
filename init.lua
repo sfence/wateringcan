@@ -45,6 +45,7 @@ end
 
 minetest.register_tool("wateringcan:wateringcan_water", {
 	description = S("Watering can with water"),
+  _tt_help = S("Use watering can by placing it to node or flora."),
 	_doc_items_create_entry = false,
 	inventory_image = "wateringcan_wateringcan_water.png",
 	wield_image = "wateringcan_wateringcan_wield.png",
