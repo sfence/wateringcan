@@ -1,6 +1,6 @@
 #Watering Can
 * A mod for Minetest
-* Version: 1.4
+* Version: 1.5
 
 ##Description
 This mod adds a watering can to minetest which you can use to make some blocks wet. :-)
@@ -35,10 +35,14 @@ Currently, the mods Farming and Pedology are supported.
 
 As for water, any node which is member of the `water` group can be used to fill up the watering can.
 
+Use field `wateringcan.wettable_node[node_name] = function(pos)` to set custom function to change node wetted by watering can.
+Field `wateringcan.wettable_node` is aviable from version 1.5.
+
 ##Dependencies
 There are only optional dependencies:
 
 * `farming`
+* `hades_farming`
 * `pedology`
 
 However, it recommended to use at least one of these mods, otherwise you have nothing to use the watering can on. ;-)
